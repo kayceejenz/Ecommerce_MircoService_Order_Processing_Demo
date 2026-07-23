@@ -84,21 +84,7 @@ The `OrderStateMachine` (`Sagas/OrderStateMachine.cs`) orchestrates the distribu
 
 **Message Flow - Payment Failure:**
 
-```
-OrderService                InventoryService           PaymentService
-    │                              │                         │
-    │◄── InventoryReserved ────────│                         │
-    │                              │                         │
-    │── ProcessPayment ─────────────────────────────────────►│
-    │                              │                         │
-    │◄── PaymentFailed ─────────────────────────────────────│
-    │                              │                         │
-    │── ReleaseInventory ─────────►│                         │
-    │   (command)                  │                         │
-    │── OrderCancelled ─────────────────────────────────────►│
-    │   (event, for notification)  │                         │
-    │   Saga → Failed              │                         │
-```
+![Message Flow - Payment Failure](../../resources/payment_failure_sequence.png)
 
 ### gRPC Server
 
