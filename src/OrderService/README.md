@@ -56,13 +56,7 @@ Instead of storing the current state in a database row, OrderService stores a se
 
 ### Order Status Lifecycle
 
-```
-Created ──────► InventoryReserved ──────► PaymentProcessed ──────► Completed
-   │                    │                       │
-   │                    │                       │
-   ▼                    ▼                       ▼
-Cancelled           Cancelled              Cancelled
-```
+![Order Lifecycle](../../resources/order_lifecycle.png)
 
 ### Saga State Machine
 
