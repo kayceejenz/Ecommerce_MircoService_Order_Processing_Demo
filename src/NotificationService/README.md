@@ -8,33 +8,7 @@ NotificationService demonstrates the **consumer-only** pattern in event-driven a
 
 ## Architecture
 
-```
-┌──────────────────────────────────────────────────────────────┐
-│                   NotificationService                         │
-│                                                              │
-│  ┌────────────────────────────────────────────────────────┐  │
-│  │                  MassTransit Consumers                  │  │
-│  │                                                        │  │
-│  │  OrderPlacedConsumer ────────────► Logs: "Order        │  │
-│  │  (IConsumer<OrderPlaced>)         confirmation sent"   │  │
-│  │                                                        │  │
-│  │  PaymentSucceededConsumer ───────► Logs: "Payment      │  │
-│  │  (IConsumer<PaymentSucceeded>)    confirmation sent"   │  │
-│  │                                                        │  │
-│  │  PaymentFailedConsumer ──────────► Logs: "Payment      │  │
-│  │  (IConsumer<PaymentFailed>)       failure notified"    │  │
-│  │                                                        │  │
-│  │  InventoryLowConsumer ───────────► Logs: "Low stock    │  │
-│  │  (IConsumer<InventoryLow>)        alert"               │  │
-│  └────────────────────────────────────────────────────────┘  │
-│                                                              │
-│  No database. Stateless. Pure event consumer.                │
-└──────────────────────────────────────────────────────────────┘
-         ▲
-         │
-      RabbitMQ
-  (4 event types)
-```
+![Notification Architecture](../../resources/notification_internal.png)
 
 ## How It Works
 
