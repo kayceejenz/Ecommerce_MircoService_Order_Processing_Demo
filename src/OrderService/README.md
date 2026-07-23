@@ -41,16 +41,7 @@ HTTP GET /api/orders/{id}
 
 Instead of storing the current state in a database row, OrderService stores a sequence of **immutable events**:
 
-```
-Traditional DB:              Event Sourcing:
-┌─────────────────┐          ┌──────────────────────────────────┐
-│ Order           │          │ Events:                           │
-│ Id: 123         │          │  1. OrderPlaced (items, total)   │
-│ Status: Paid    │          │  2. InventoryReserved            │
-│ Total: $50      │          │  3. PaymentProcessed ($50)       │
-└─────────────────┘          │  4. OrderConfirmed               │
-                             └──────────────────────────────────┘
-```
+![DB vs Event Sourcing](../../resources/db_vs_events.png)
 
 **Order Aggregate** (`Domain/Order.cs`):
 - Factory method `Order.Create()` validates business rules and raises `OrderPlaced` event
