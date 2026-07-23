@@ -13,38 +13,7 @@ The ApiGateway acts as the front door to the entire microservices system. Extern
 
 ## Architecture
 
-```
-                    ┌─────────────────────────────┐
-                    │       External Client        │
-                    │   (Browser / Mobile App)     │
-                    └──────────────┬──────────────┘
-                                   │ HTTP
-                                   ▼
-                    ┌─────────────────────────────┐
-                    │      CorrelationIdMiddleware  │
-                    │   (X-Correlation-Id header)  │
-                    └──────────────┬──────────────┘
-                                   │
-                                   ▼
-                    ┌─────────────────────────────┐
-                    │       GatewayController      │
-                    │   (Routes to typed clients)  │
-                    └──────┬──────┬──────┬────────┘
-                           │      │      │
-              ┌────────────┘      │      └────────────┐
-              │                   │                   │
-              ▼                   ▼                   ▼
-    ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐
-    │  CatalogClient  │ │   OrderClient   │ │  PaymentClient  │
-    │  (Polly v8)     │ │  (Polly v8)     │ │  (Polly v8)     │
-    └────────┬────────┘ └────────┬────────┘ └────────┬────────┘
-             │                   │                   │
-             ▼                   ▼                   ▼
-    ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐
-    │ CatalogService  │ │  OrderService   │ │ PaymentService  │
-    │   :5010         │ │   :5020         │ │   :5040         │
-    └─────────────────┘ └─────────────────┘ └─────────────────┘
-```
+![Gateway Flow](../../resources/gateway_flow.png)
 
 ## How It Works
 
