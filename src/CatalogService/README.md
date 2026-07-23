@@ -8,41 +8,7 @@ CatalogService manages the product catalog - the central source of truth for pro
 
 ## Architecture
 
-```
-                        ┌──────────────────────┐
-                        │     ApiGateway       │
-                        │    (REST Client)     │
-                        └──────────┬───────────┘
-                                   │ HTTP/REST
-                                   ▼
-┌──────────────────────────────────────────────────────┐
-│                  CatalogService                       │
-│                                                      │
-│  ┌─────────────────┐    ┌─────────────────────────┐  │
-│  │ ProductsController│    │ InventoryGrpcServiceImpl │  │
-│  │   (REST API)     │    │   (gRPC Server)          │  │
-│  └────────┬────────┘    └────────────┬────────────┘  │
-│           │                          │                │
-│           ▼                          │                │
-│  ┌─────────────────┐                 │                │
-│  │  Redis Cache    │                 │                │
-│  │  (cache-aside)  │                 │                │
-│  └────────┬────────┘                 │                │
-│           │ (miss)                   │                │
-│           ▼                          │                │
-│  ┌─────────────────┐                 │                │
-│  │ CatalogDbContext │                 │                │
-│  │  (PostgreSQL)   │                 │                │
-│  └─────────────────┘                 │                │
-└──────────────────────────────────────────────────────┘
-                                   │
-                                   │ gRPC Server Streaming
-                                   ▼
-                        ┌──────────────────────┐
-                        │   Dashboard/Client    │
-                        │ (Stock Watcher)       │
-                        └──────────────────────┘
-```
+![Catalog Architecture](../../resources/catalog_internal.png)
 
 ## How It Works
 
