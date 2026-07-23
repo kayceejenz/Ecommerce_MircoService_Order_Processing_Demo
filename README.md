@@ -17,7 +17,7 @@ A production-like microservice architecture demonstrating how various services i
 
 ## Architecture Overview
 
-![Architecture Overview](resources/overview-architecture.svg)
+![Architecture Overview](resources/overview-architecture.png)
 
 ---
 
