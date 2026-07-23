@@ -80,21 +80,7 @@ The `OrderStateMachine` (`Sagas/OrderStateMachine.cs`) orchestrates the distribu
 
 **Message Flow - Happy Path:**
 
-```
-OrderService                InventoryService           PaymentService
-    │                              │                         │
-    │── OrderPlaced event ────────►│                         │
-    │   (via RabbitMQ)             │                         │
-    │                              │── ReserveInventory ────►│
-    │                              │   (command)             │
-    │◄── InventoryReserved ────────│                         │
-    │   (event)                    │                         │
-    │── ProcessPayment ─────────────────────────────────────►│
-    │   (command)                  │                         │
-    │◄── PaymentSucceeded ──────────────────────────────────│
-    │   (event)                    │                         │
-    │   Saga → Completed           │                         │
-```
+![Message Flow - Happy Path](../../resources/order_sequence_happy_flow.png)
 
 **Message Flow - Payment Failure:**
 
